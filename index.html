@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>for you only</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap');
+
+:root{
+  --bg:#f8eae3;
+  --paper:#fffaf6;
+  --ink:#40312f;
+  --muted:#a17e7b;
+  --pink:#c9788b;
+  --green:#6d9079;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%}
+
+body{
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:100;
+  pointer-events:none;
+  opacity:.10;
+  background-image:
+    radial-gradient(rgba(110,80,70,.35) .45px,transparent .55px),
+    radial-gradient(rgba(255,255,255,.8) .5px,transparent .6px);
+  background-size:7px 7px,11px 11px;
+}
+
+button{font-family:inherit;-webkit-appearance:none}
+
+#app{
+  width:100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(12px);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.22,.61,.36,1),
+    visibility .65s;
+}
+
+.page.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.inner{
+  width:min(100%,430px);
+  height:100%;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.eyebrow{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#b88c8b;
+  text-transform:uppercase;
+  font-weight:600;
+  text-align:center;
+}
+
+.soft{
+  color:#9e817d;
+  font-size:12px;
+  line-height:1.7;
+  text-align:center;
+}
+
+.primary{
+  border:0;
+  border-radius:999px;
+  padding:13px 27px;
+  min-width:145px;
+  background:linear-gradient(180deg,#cf8192,#c37185);
+  color:white;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(173,94,115,.17);
+  cursor:pointer;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.primary:active{transform:scale(.97)}
+
+.secondary{
+  border:1px solid #e1cdca;
+  border-radius:999px;
+  padding:12px 22px;
+  background:rgba(255,255,255,.68);
+  color:#907672;
+  font-size:11px;
+  cursor:pointer;
+}
+
+/* PAGE 1 */
+#page1{
+  background:
+    radial-gradient(circle at 30% 10%,#fffaf3 0 18%,transparent 38%),
+    radial-gradient(circle at 82% 80%,rgba(230,185,180,.27),transparent 35%),
+    linear-gradient(145deg,#fbf2eb,#f6e5dd);
+}
+
+.loading-ring{
+  width:170px;
+  height:170px;
+  border:1px solid rgba(115,106,103,.23);
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+.wreath{
+  width:112px;
+  height:112px;
+  border:1px dashed rgba(107,135,163,.45);
+  border-radius:50%;
+  position:relative;
+  animation:rotate 10s linear infinite;
+}
+
+.wreath span{
+  position:absolute;
+  font-size:25px;
+}
+
+.wreath span:nth-child(1){top:-11px;left:41px}
+.wreath span:nth-child(2){right:-7px;top:37px}
+.wreath span:nth-child(3){bottom:-7px;left:39px}
+.wreath span:nth-child(4){left:-7px;top:37px}
+
+.dots{
+  display:flex;
+  gap:7px;
+  position:absolute;
+}
+
+.dots i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#bfc3d4;
+  animation:dot 1.1s infinite;
+}
+
+.dots i:nth-child(2){animation-delay:.15s}
+.dots i:nth-child(3){animation-delay:.3s}
+
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes dot{
+  0%,100%{opacity:.25;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.1)}
+}
+
+/* PAGE 2 */
+#page2{
+  background:
+    radial-gradient(circle at 50% 43%,rgba(106,55,72,.28),transparent 42%),
+    linear-gradient(160deg,#2c1720,#21131a);
+}
+
+.dark-envelope{
+  width:min(315px,83vw);
+  cursor:pointer;
+  animation:floatEnvelope 3.8s ease-in-out infinite;
+}
+
+@keyframes floatEnvelope{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+
+.envelope{
+  width:100%;
+  aspect-ratio:1.55;
+  background:#fffaf0;
+  border:1px solid #d9cfc2;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 24px 55px rgba(0,0,0,.3);
+}
+
+.envelope:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-top:105px solid #f1e9df;
+  border-left:158px solid transparent;
+  border-right:158px solid transparent;
+}
+
+.envelope:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(35deg,transparent 49.6%,#ddd2c7 50%,transparent 50.5%),
+    linear-gradient(-35deg,transparent 49.6%,#ddd2c7 50%,transparent 50.5%);
+  opacity:.65;
+}
+
+.wax,.seal{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  top:52%;
+  transform:translate(-50%,-50%);
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:radial-gradient(circle at 38% 30%,#e9aaa9,#bc6c79 68%,#9e5b67);
+  border:4px solid #d89494;
+  box-shadow:0 5px 12px rgba(70,35,45,.2);
+}
+
+.wax:after,.seal:after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:50%;
+}
+
+.dark-hint{
+  color:#d4afb1;
+  margin-top:28px;
+  font-size:11px;
+}
+
+/* PAGE 3 */
+#page3,#page4,#page5,#page6,#page7,#page8{
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,255,255,.75),transparent 30%),
+    radial-gradient(circle at 90% 82%,rgba(227,179,175,.20),transparent 35%),
+    var(--bg);
+}
+
+.private{
+  text-align:center;
+  margin-bottom:34px;
+}
+
+.private h1{
+  font-family:"Caveat",cursive;
+  font-size:57px;
+  line-height:.91;
+  font-weight:600;
+  margin:14px 0 10px;
+}
+
+.main-envelope{
+  width:min(370px,88vw);
+  height:205px;
+  background:rgba(255,253,250,.78);
+  border:1px solid rgba(226,213,207,.9);
+  box-shadow:0 18px 40px rgba(106,76,74,.12);
+  position:relative;
+  cursor:pointer;
+  transition:transform .25s ease;
+}
+
+.main-envelope:active{transform:scale(.985)}
+
+.main-envelope:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(140deg,transparent 49.5%,#e4d8d1 50%,transparent 50.6%),
+    linear-gradient(220deg,transparent 49.5%,#e4d8d1 50%,transparent 50.6%);
+  opacity:.75;
+}
+
+.main-envelope:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  border-left:185px solid transparent;
+  border-right:185px solid transparent;
+  border-top:87px solid rgba(255,250,247,.96);
+}
+
+.tap{
+  margin-top:26px;
+  color:#9e817c;
+  font-size:11px;
+}
+
+/* PAGE 4 */
+.paper{
+  width:min(382px,91vw);
+  height:min(620px,79vh);
+  position:relative;
+  padding:50px 34px 32px;
+  background:
+    linear-gradient(rgba(255,252,248,.96),rgba(255,252,248,.96)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 34px,
+      rgba(188,168,160,.11) 35px
+    );
+  border-radius:5px 5px 23px 23px;
+  box-shadow:
+    0 20px 44px rgba(101,72,71,.13),
+    inset 0 0 30px rgba(195,151,143,.06);
+  overflow:hidden;
+}
+
+.paper:before{
+  content:"";
+  position:absolute;
+  top:-9px;
+  left:0;
+  right:0;
+  height:35px;
+  background:linear-gradient(#fffdf9,#eee5de);
+  border-radius:50%;
+}
+
+.paper-scroll{
+  height:100%;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+
+.paper-scroll::-webkit-scrollbar{display:none}
+
+.from{
+  text-align:center;
+  color:#b8787f;
+  font-family:"Caveat",cursive;
+  font-size:17px;
+}
+
+.paper h2{
+  font-family:"Caveat",cursive;
+  text-align:center;
+  font-size:41px;
+  line-height:1;
+  margin:4px 0 21px;
+}
+
+.paper p{
+  font-family:"Caveat",cursive;
+  font-size:20px;
+  line-height:1.4;
+  margin-bottom:14px;
+}
+
+.paper .primary{
+  display:block;
+  margin:25px auto 10px;
+}
+
+.flower-corner{
+  position:absolute;
+  right:9px;
+  bottom:3px;
+  font-size:55px;
+  opacity:.58;
+}
+
+/* PAGE 5 */
+.question-card{
+  width:min(390px,91vw);
+  min-height:575px;
+  position:relative;
+  padding:55px 25px 38px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    linear-gradient(rgba(255,252,248,.97),rgba(255,252,248,.97)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 34px,
+      rgba(190,170,160,.11) 35px
+    );
+  border-radius:9px 9px 28px 24px;
+  border:1px solid rgba(226,210,203,.72);
+  box-shadow:
+    0 24px 48px rgba(101,72,71,.14),
+    8px 10px 0 rgba(225,196,190,.20);
+  overflow:hidden;
+  transform:rotate(-1.25deg);
+  transition:transform .35s ease;
+}
+
+.question-card:hover{
+  transform:rotate(-.55deg) translateY(-2px);
+}
+
+.question-card:before{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:-8px;
+  width:72px;
+  height:23px;
+  background:rgba(231,190,186,.38);
+  transform:rotate(-8deg);
+  border-radius:2px;
+  filter:blur(.1px);
+}
+
+.question-card:after{
+  content:"✦  ✧";
+  position:absolute;
+  right:20px;
+  top:15px;
+  color:#d5b66d;
+  letter-spacing:5px;
+}
+
+.question-sub{
+  font-family:"Caveat",cursive;
+  color:#b47b82;
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.question-card h2{
+  font-family:"Caveat",cursive;
+  font-size:59px;
+  line-height:.88;
+  font-weight:600;
+}
+
+.question-note{
+  margin-top:28px;
+  font-family:"Caveat",cursive;
+  font-size:18px;
+  color:#967875;
+}
+
+.answer-row{
+  margin-top:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  position:relative;
+  min-height:60px;
+  transform:rotate(.7deg);
+}
+
+.answer-row .primary{
+  border-radius:18px 24px 20px 25px;
+}
+
+.answer-row .secondary{
+  border-radius:21px 17px 23px 18px;
+}
+
+#yesButton{
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease;
+}
+
+#thinkButton{
+  position:relative;
+  z-index:5;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1);
+}
+
+/* PAGE 6 SCAN */
+.scan-title{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.scan-title h1{
+  font-family:"Caveat",cursive;
+  font-size:56px;
+  line-height:.9;
+  margin:14px 0 20px;
+}
+
+.scan-copy{
+  max-width:310px;
+  margin:auto;
+}
+
+.scan-card{
+  width:235px;
+  height:235px;
+  padding:12px;
+  margin:25px 0;
+  border-radius:27px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 18px 38px rgba(100,66,67,.12);
+}
+
+.scan-inner{
+  width:100%;
+  height:100%;
+  border-radius:19px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#d91f48;
+}
+
+/* GAMBAR SCAN DARI USER */
+.scan-image{
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  display:block;
+  position:relative;
+  z-index:2;
+  border-radius:14px;
+}
+
+/* Jika gambar kamu transparan */
+.scan-image.contain{
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  padding:5px;
+}
+
+.scan-line{
+  position:absolute;
+  left:16px;
+  right:16px;
+  height:3px;
+  border-radius:3px;
+  background:#fff;
+  box-shadow:0 0 12px #fff;
+  z-index:4;
+  animation:scanLine 1.5s ease-in-out infinite;
+}
+
+@keyframes scanLine{
+  0%,100%{top:22px}
+  50%{top:calc(100% - 25px)}
+}
+
+.scan-pill{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  color:#aa5568;
+  padding:10px 20px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  z-index:5;
+  white-space:nowrap;
+}
+
+.scan-status{
+  color:#b46f78;
+  font-family:"Caveat",cursive;
+  font-size:18px;
+  text-align:center;
+}
+
+/* PAGE 7 */
+.result-card{
+  width:min(390px,91vw);
+  min-height:610px;
+  position:relative;
+  padding:52px 28px 32px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  background:
+    linear-gradient(rgba(255,252,248,.96),rgba(255,252,248,.96)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 34px,
+      rgba(190,170,160,.11) 35px
+    );
+  border-radius:7px 7px 21px 21px;
+  box-shadow:0 20px 44px rgba(101,72,71,.12);
+}
+
+.valid{
+  color:#b87a82;
+  font-family:"Caveat",cursive;
+  font-size:17px;
+}
+
+.result-card h2{
+  font-family:"Caveat",cursive;
+  font-size:61px;
+  line-height:.86;
+  font-weight:600;
+  margin:7px 0 23px;
+}
+
+.result-copy{
+  font-family:"Caveat",cursive;
+  font-size:20px;
+  line-height:1.35;
+  max-width:295px;
+}
+
+.result-stamp{
+  width:105px;
+  height:105px;
+  margin:21px 0 10px;
+  border-radius:50%;
+  border:3px double #d4878a;
+  background:#fff4ee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#bd6672;
+  font-family:"Caveat",cursive;
+  font-size:43px;
+}
+
+.from-result{
+  font-size:13px;
+  color:#87706c;
+  margin-bottom:18px;
+}
+
+.reply{
+  width:min(290px,100%);
+  padding:11px 15px;
+  border-radius:999px;
+  border:1px solid #ead8d2;
+  color:#b17c80;
+  background:rgba(255,255,255,.55);
+  font-size:11px;
+  margin-bottom:14px;
+}
+
+.restart{
+  margin-top:18px;
+  background:none;
+  border:0;
+  text-decoration:underline;
+  color:#8c7672;
+  font-size:11px;
+  cursor:pointer;
+}
+
+/* PAGE 8 */
+.bouquet-fallback{
+  width:320px;
+  height:320px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:170px;
+}
+
+.bouquet-card{
+  width:min(400px,92vw);
+  margin-top:-2px;
+  padding:28px 25px 23px;
+  border-radius:28px;
+  background:rgba(255,253,248,.94);
+  box-shadow:0 18px 38px rgba(102,70,70,.1);
+  text-align:center;
+}
+
+.new-label{
+  color:#aaa49c;
+  font-size:9px;
+  letter-spacing:4px;
+  font-weight:700;
+}
+
+.new-chapter{
+  font-family:"Parisienne",cursive;
+  color:#8e8d88;
+  font-size:35px;
+  margin:8px 0;
+}
+
+.bouquet-card p{
+  color:#8e8580;
+  font-size:12px;
+  margin-bottom:11px;
+}
+
+.meanings{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:center;
+}
+
+.meaning{
+  padding:7px 13px;
+  border:1px solid #eee2dc;
+  background:#fff;
+  border-radius:999px;
+  color:#85827c;
+  font-size:10px;
+}
+
+.bouquet-actions{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+}
+
+.back{background:var(--green);min-width:115px}
+.gift{min-width:175px}
+
+.gift-note{
+  color:#a59792;
+  font-size:10px;
+}
+
+/* FLOATING */
+#floating{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:80;
+}
+
+.float{
+  position:absolute;
+  bottom:-20px;
+  color:#d8919a;
+  opacity:.27;
+  animation:floatUp 7s linear forwards;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0) rotate(0);opacity:0}
+  15%{opacity:.28}
+  100%{transform:translateY(-110vh) rotate(120deg);opacity:0}
+}
+
+/* MUSIC */
+.music{
+  position:fixed;
+  right:15px;
+  top:15px;
+  z-index:200;
+  width:37px;
+  height:37px;
+  border-radius:50%;
+  border:1px solid rgba(185,132,135,.3);
+  background:rgba(255,255,255,.52);
+  color:#9b6971;
+  backdrop-filter:blur(8px);
+  cursor:pointer;
+}
+
+@media(max-width:430px){
+  .inner{padding:20px 18px}
+  .private h1{font-size:50px}
+
+  .main-envelope{
+    width:350px;
+    height:190px;
+  }
+
+  .main-envelope:after{
+    border-left-width:175px;
+    border-right-width:175px;
+    border-top-width:82px;
+  }
+
+  .paper{
+    height:78vh;
+    padding:45px 29px 28px;
+  }
+
+  .paper p{font-size:18px}
+  .question-card{min-height:545px}
+  .question-card h2{font-size:53px}
+  .result-card{min-height:580px}
+  .result-card h2{font-size:55px}
+}
+
+@media(max-height:720px){
+  .paper{height:74vh}
+  .question-card{min-height:500px}
+  .result-card{min-height:530px}
+}
+
+.loading-icon{
+  width:120px;
+  height:120px;
+
+  object-fit:contain;
+
+  display:block;
+
+  animation:
+    loadingFloat 2s ease-in-out infinite;
+}
+
+@keyframes loadingFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-5px);
+  }
+
+}
+
+.user-envelope{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  cursor:pointer;
+
+  transition:
+    transform .3s ease,
+    filter .3s ease;
+}
+
+.envelope-image{
+  width:min(75vw,330px);
+  max-height:55vh;
+
+  object-fit:contain;
+
+  display:block;
+
+  transition:
+    transform .3s ease,
+    filter .3s ease;
+}
+
+.user-envelope:hover .envelope-image{
+  transform:
+    scale(1.04)
+    rotate(-1deg);
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(0,0,0,.16)
+    );
+}
+
+.user-envelope:active .envelope-image{
+  transform:scale(.96);
+}
+
+.dark-hint{
+  margin-top:16px;
+
+  font-size:12px;
+  letter-spacing:.5px;
+
+  color:#806b63;
+
+  text-align:center;
+}
+
+/* =====================================================
+   PAGE 3
+===================================================== */
+
+#page3 .inner{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:20px;
+}
+
+
+/* =====================================================
+   ENVELOPE DARI USER
+===================================================== */
+
+#page3 .user-envelope{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  cursor:pointer;
+
+  transition:
+    transform .3s ease;
+}
+
+
+/* gambar envelope */
+
+#page3 .envelope-image{
+
+  width:min(82vw,390px);
+
+  max-height:55vh;
+
+  object-fit:contain;
+
+  display:block;
+
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+/* hover desktop */
+
+#page3 .user-envelope:hover .envelope-image{
+
+  transform:
+    scale(1.035)
+    rotate(-1deg);
+
+  filter:
+    drop-shadow(
+      0 15px 20px
+      rgba(80,55,45,.18)
+    );
+}
+
+
+/* ketika ditekan */
+
+#page3 .user-envelope:active .envelope-image{
+
+  transform:
+    scale(.96);
+}
+
+
+/* =====================================================
+   TEXT UTAMA
+===================================================== */
+
+#page3 .soft{
+
+  margin-top:18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(18px,5vw,25px);
+
+  font-weight:500;
+
+  line-height:1.35;
+
+  color:#59443b;
+
+  letter-spacing:.2px;
+}
+
+
+/* =====================================================
+   TEXT KECIL
+===================================================== */
+
+#page3 .tap{
+
+  margin-top:8px;
+
+  max-width:330px;
+
+  font-family:
+    "Trebuchet MS",
+    "Segoe UI",
+    sans-serif;
+
+  font-size:
+    clamp(10px,3vw,12px);
+
+  line-height:1.5;
+
+  letter-spacing:.4px;
+
+  color:#987a70;
+
+  opacity:.85;
+}
+
+
+/* =====================================================
+   ANIMASI LEMBUT
+===================================================== */
+
+#page3 .user-envelope{
+
+  animation:
+    envelopeFloat 3s ease-in-out infinite;
+}
+
+@keyframes envelopeFloat{
+
+  0%,
+  100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-5px);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+  #page3 .envelope-image{
+
+    width:86vw;
+
+    max-height:52vh;
+
+  }
+
+  #page3 .soft{
+
+    margin-top:14px;
+
+    font-size:19px;
+
+  }
+
+  #page3 .tap{
+
+    margin-top:7px;
+
+    max-width:300px;
+
+    font-size:10px;
+
+  }
+
+}
+
+/* =====================================================
+   BOUQUET DARI USER
+===================================================== */
+
+.bouquet{
+  width:min(310px,75vw);
+  max-height:340px;
+
+  object-fit:contain;
+
+  display:block;
+
+  margin:0 auto 5px;
+
+  animation:
+    bouquetFloat 3.5s ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(100,70,65,.12)
+    );
+}
+
+
+/* animasi lembut */
+
+@keyframes bouquetFloat{
+
+  0%,
+  100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-6px);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+  .bouquet{
+    width:76vw;
+    max-height:290px;
+  }
+
+}
+
+/* =====================================================
+   PAGE 8 — SCROLL
+===================================================== */
+
+#page8{
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  align-items:flex-start;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+#page8 .inner{
+  min-height:100%;
+  height:auto;
+
+  padding-top:35px;
+  padding-bottom:45px;
+
+  justify-content:flex-start;
+}
+
+/* bouquet dari user */
+
+#page8 .bouquet{
+  flex-shrink:0;
+
+  width:min(310px,75vw);
+  max-height:340px;
+
+  object-fit:contain;
+
+  display:block;
+
+  margin:0 auto 15px;
+
+  animation:
+    bouquetFloat 3.5s ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(100,70,65,.12)
+    );
+}
+
+
+/* card */
+
+#page8 .bouquet-card{
+  flex-shrink:0;
+
+  width:min(400px,92vw);
+
+  margin:0 auto;
+
+  padding:28px 25px 25px;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,253,248,.94);
+
+  box-shadow:
+    0 18px 38px
+    rgba(102,70,70,.10);
+
+  text-align:center;
+}
+
+
+/* mobile */
+
+@media(max-width:430px){
+
+  #page8 .inner{
+    padding-top:25px;
+    padding-bottom:40px;
+  }
+
+  #page8 .bouquet{
+    width:78vw;
+    max-height:310px;
+  }
+
+  #page8 .bouquet-card{
+    width:92vw;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+  <div class="inner">
+
+    <div class="loading">
+
+      <!-- ICON DARI KAMU -->
+      <img
+        src="loading.png"
+        class="loading-icon"
+        alt="Loading">
+
+    </div>
+<div class="dark-hint">loading... ♡</div>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+  <div class="inner">
+
+    <div class="user-envelope" onclick="openEnvelope()">
+      <img
+        src="envelope.png"
+        class="envelope-image"
+        alt="Envelope">
+    </div>
+
+    <div class="dark-hint">
+      tap amplopnya untuk membuka ♡
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+  <div class="inner">
+
+    <div class="user-envelope" onclick="openLetter()">
+
+      <img
+        src="envelopebuka.png"
+        class="envelope-image"
+        alt="Envelope terbuka">
+
+    </div>
+
+    <div class="soft">
+  Aku tahu cinta tidak tidak hanya bisa di ungkapkapin dengan kata².but..
+    </div>
+
+    <div class="tap">
+      Tap sealnya. Surat kecilnya bakal kebuka sendiri.
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page" id="page4">
+  <div class="inner">
+
+    <div class="paper">
+      <div class="paper-scroll">
+
+        <div class="from">dari Dendi</div>
+
+        <h2>Dibaca yaa...</h2>
+
+        <p>
+          Thank you for being someone yang selalu ada dan bikin hari-hari ini terasa lebih berarti.
+        </p>
+
+        <p>
+         I'm really grateful that somehow, di antara banyaknya orang di dunia ini, aku bisa dipertemukan sama kamu. 
+        </p>
+
+        <p>
+         Kamu mungkin nggak selalu sadar, but the little things you do selalu punya tempat tersendiri di hati aku.
+        </p>
+
+        <p>
+          Thank you for listening, for staying, dan untuk semua moments yang udah kita lewatin bareng. Dan dari itu semua muncul pertanyaan yang sangat penting untung di bahas yaitu "What is our status?
+        </p>
+
+        <button class="primary" onclick="goTo(5)">
+          Oke, lanjut
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page" id="page5">
+  <div class="inner">
+
+    <div class="question-card">
+
+      <div class="question-sub">
+        mini mission buat Dita
+      </div>
+
+      <h2>
+      Jadi...<br>
+       Do you want to<br>
+     be my girlfriend?
+      </h2>
+
+      <div class="question-note" id="questionNote">
+        santai, gua tunggu
+      </div>
+
+      <div class="answer-row">
+
+        <button
+          class="primary"
+          id="yesButton"
+          onclick="yesAnswer()">
+          yaudah, gas
+        </button>
+
+        <button
+          class="secondary"
+          id="thinkButton">
+          mikir dulu
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6 : SCAN -->
+<section class="page" id="page6">
+  <div class="inner">
+
+    <div class="scan-title">
+
+      <div class="eyebrow">FINAL CHECK</div>
+
+      <h1>
+        scan dulu biar<br>
+        sah
+      </h1>
+
+      <div class="soft scan-copy">
+        Jawaban Dita masuk ruang pemeriksaan.<br>
+        Kalau cahayanya selesai, sertifikatnya langsung keluar.
+      </div>
+
+    </div>
+
+    <div class="scan-card">
+      <div class="scan-inner">
+
+        <!--
+          =================================================
+          GAMBAR SCAN DARI KAMU
+          =================================================
+
+          GANTI nama file ini jika perlu:
+
+          assets/scan-image.png
+
+          Gambar kamu akan memenuhi kotak scan.
+        -->
+
+        <img
+          src="scan.jpg"
+          class="scan-image"
+          alt="Scan image"
+          onerror="this.style.display='none';"
+        >
+
+        <div class="scan-line"></div>
+
+        <div class="scan-pill">
+          SCANNING...
+        </div>
+
+      </div>
+    </div>
+
+    <div class="scan-status" id="scanStatus">
+      mengecek kadar salting... hampir selesai
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 7 -->
+<section class="page" id="page7">
+  <div class="inner">
+
+    <div class="result-card">
+
+      <div class="valid">hasil scan: valid</div>
+
+      <h2>
+        Okay berarti kita resmi punya status ya
+      </h2>
+
+      <div class="result-copy">
+        Kita jalanin sama sama trus ya sampe ke jenjang yang lebih serius,di pertemuan selanjutnya Aku akan siapin dinner yang spesial buat kita.
+      </div>
+
+      <div class="result-stamp">♡</div>
+
+      <div class="from-result">
+       
+From Dendi,to Dita simpan baik baik ya.
+      </div>
+
+      <div class="reply">
+        Screenshot ini, terus kirim ke Raka.
+      </div>
+
+      <button class="primary" onclick="goTo(8)">
+        Lanjut ke bouquet
+      </button>
+
+      <button class="restart" onclick="restart()">
+        Ulang dari awal
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<<!-- PAGE 8 -->
+<section class="page" id="page8">
+  <div class="inner">
+
+    <!-- BOUQUET DARI KAMU -->
+    <img
+      src="bouqet.png"
+      class="bouquet"
+      alt="Bouquet untuk Echa">
+
+    <div class="bouquet-card">
+
+      <div class="new-label">
+        AWAL BARU
+      </div>
+
+      <div class="new-chapter">
+        New Chapter untuk Dita
+      </div>
+
+      <p>
+        Harapan baik untuk babak baru.
+      </p>
+
+      <div class="meanings">
+
+        <div class="meaning">
+          <b>Soft colors</b> · untuk rasa yang tulus
+        </div>
+
+        <div class="meaning">
+          <b>Little blooms</b> · untuk hal-hal kecil yang berarti
+        </div>
+
+        <div class="meaning">
+          <b>Greenery</b> · untuk sesuatu yang terus tumbuh
+        </div>
+
+      </div>
+
+      <div class="bouquet-actions">
+
+        <button
+          class="primary back"
+          onclick="goTo(7)">
+          Kembali
+        </button>
+
+        <button
+          class="primary gift"
+          onclick="replyGift()">
+          Balas kadonya 💌
+        </button>
+
+        <div class="gift-note">
+          Gratis — balasanmu nempel di kado ini.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div id="floating"></div>
+
+<button class="music" id="musicButton" onclick="toggleMusic()">♫</button>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+let currentPage = 1;
+let scanTimer;
+let yesScale = 1;
+
+const music = document.getElementById("music");
+const thinkButton = document.getElementById("thinkButton");
+const yesButton = document.getElementById("yesButton");
+
+
+/* ================= PAGE ================= */
+
+function goTo(number){
+
+  if(number === currentPage) return;
+
+  const oldPage =
+    document.getElementById("page" + currentPage);
+
+  const newPage =
+    document.getElementById("page" + number);
+
+  if(!newPage) return;
+
+  if(oldPage){
+    oldPage.classList.remove("active");
+  }
+
+  newPage.classList.add("active");
+
+  currentPage = number;
+
+  if(number === 6){
+    startScan();
+  }
+}
+
+
+/* ================= ENVELOPE ================= */
+
+function openEnvelope(){
+  startMusic();
+  goTo(3);
+}
+
+function openLetter(){
+  startMusic();
+  goTo(4);
+}
+
+
+/* ================= YES ================= */
+
+function yesAnswer(){
+
+  document.getElementById("questionNote").textContent =
+    "oke... jangan berubah pikiran ya ♡";
+
+  setTimeout(function(){
+    goTo(6);
+  },450);
+}
+
+
+/* =================
+   MIKIR DULU
+   TIDAK BISA DIPENCET
+================= */
+
+function moveThinkButton(){
+
+  const row =
+    document.querySelector(".answer-row");
+
+  const rowRect =
+    row.getBoundingClientRect();
+
+  const btnRect =
+    thinkButton.getBoundingClientRect();
+
+  const maxX =
+    Math.max(70,rowRect.width / 2 - btnRect.width / 2);
+
+  const x =
+    (Math.random() * maxX * 2) - maxX;
+
+  const y =
+    -8 - Math.random() * 28;
+
+  thinkButton.style.transform =
+    `translate(${x}px,${y}px)`;
+
+
+  /* tombol yaudah gas membesar */
+
+  yesScale += .08;
+
+  if(yesScale > 1.42){
+    yesScale = 1.42;
+  }
+
+  yesButton.style.transform =
+    `scale(${yesScale})`;
+
+  yesButton.style.boxShadow =
+    `0 ${10 + yesScale * 3}px
+     ${20 + yesScale * 7}px
+     rgba(173,94,115,.23)`;
+
+
+  document.getElementById("questionNote").textContent =
+    yesScale >= 1.32
+      ? "udah deh, jangan mikir terus 😭"
+      : "hehe, tombolnya kabur ♡";
+}
+
+
+/* desktop */
+thinkButton.addEventListener(
+  "mouseenter",
+  moveThinkButton
+);
+
+
+/* mobile */
+thinkButton.addEventListener(
+  "touchstart",
+  function(e){
+    e.preventDefault();
+    moveThinkButton();
+  },
+  {passive:false}
+);
+
+
+/* kalau tetap kena click */
+thinkButton.addEventListener(
+  "click",
+  function(e){
+    e.preventDefault();
+    moveThinkButton();
+  }
+);
+
+
+/* ================= SCAN ================= */
+
+function startScan(){
+
+  clearTimeout(scanTimer);
+
+  const status =
+    document.getElementById("scanStatus");
+
+  status.textContent =
+    "mengecek kadar salting... hampir selesai";
+
+
+  setTimeout(function(){
+
+    status.textContent =
+      "berhasil! kadar salting terdeteksi tinggi ♡";
+
+  },2500);
+
+
+  scanTimer =
+    setTimeout(function(){
+      goTo(7);
+    },4700);
+}
+
+
+/* ================= RESTART ================= */
+
+function restart(){
+
+  clearTimeout(scanTimer);
+
+  currentPage = 1;
+  yesScale = 1;
+
+  yesButton.style.transform = "scale(1)";
+  yesButton.style.boxShadow =
+    "0 8px 20px rgba(173,94,115,.17)";
+
+  thinkButton.style.transform =
+    "translate(0,0)";
+
+  document.getElementById("questionNote").textContent =
+    "santai, gua tunggu";
+
+  document.querySelectorAll(".page")
+    .forEach(function(page){
+      page.classList.remove("active");
+    });
+
+  document.getElementById("page1")
+    .classList.add("active");
+}
+
+
+/* ================= MUSIC ================= */
+
+function startMusic(){
+  music.play().catch(function(){});
+}
+
+function toggleMusic(){
+
+  const btn =
+    document.getElementById("musicButton");
+
+  if(music.paused){
+
+    music.play().catch(function(){});
+    btn.textContent = "♫";
+
+  }else{
+
+    music.pause();
+    btn.textContent = "×";
+
+  }
+}
+
+
+/* ================= BOUQUET ================= */
+
+function replyGift(){
+
+  alert(
+    "Nanti tombol ini bisa diarahkan langsung ke WhatsApp 💌"
+  );
+
+}
+
+
+/* ================= FLOATING ================= */
+
+function createFloat(){
+
+  const item =
+    document.createElement("span");
+
+  item.className = "float";
+
+  const symbols = ["♡","♥","✦","✧","·"];
+
+  item.textContent =
+    symbols[
+      Math.floor(Math.random()*symbols.length)
+    ];
+
+  item.style.left =
+    Math.random()*100 + "%";
+
+  item.style.fontSize =
+    (8 + Math.random()*12) + "px";
+
+  item.style.animationDuration =
+    (5 + Math.random()*5) + "s";
+
+  document.getElementById("floating")
+    .appendChild(item);
+
+  setTimeout(function(){
+    item.remove();
+  },10000);
+}
+
+setInterval(createFloat,900);
+
+
+/* ================= OPENING ================= */
+
+setTimeout(function(){
+  goTo(2);
+},2600);
+
+</script>
+
+</body>
+</html>
